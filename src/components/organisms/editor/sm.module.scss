@@ -1,9 +1,25 @@
+@import '../../../styles//variables.module.scss';
+
 :global {
   .rc-md-editor {
     border: none;
+
+    background: none;
+
+    *:not(a) {
+      background-color: rgb(31, 31, 31) !important;
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    a {
+      color: $lightGreen;
+    }
+    & .table-list.wrap .list-item {
+      background-color: $lightGreen !important;
+    }
   }
 
   .section.sec-md.visible {
-    border-right: 1px solid lightblue;
+    border-right: 2px solid #757575;
   }
 }

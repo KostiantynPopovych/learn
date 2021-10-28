@@ -1,5 +1,24 @@
+@import '../../../styles//variables.module.scss';
+
 .Header {
   &_Button {
     font-size: 3rem;
+
+    &_Icon {
+      path {
+        fill: $lightGreen;
+      }
+    }
+  }
+}
+
+:global {
+  .ant-page-header-heading-title {
+    font-family: Gluten;
+  }
+
+  .ant-page-header-heading-sub-title {
+    font-weight: 300;
+    font-family: Gluten;
   }
 }

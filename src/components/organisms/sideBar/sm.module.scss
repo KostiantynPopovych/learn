@@ -1,0 +1,70 @@
+@import '../../../styles//variables.module.scss';
+
+.Logo {
+  text-align: center;
+  padding: 1.8rem 0;
+  font-size: 3.4rem;
+
+  font-family: Gluten;
+}
+
+:global {
+  .ant-menu {
+    max-height: calc(100 vh - 137 px);
+    overflow: scroll;
+  }
+
+  .ant-layout-sider-collapsed {
+    flex: 0 0 10rem !important;
+    max-width: 10rem !important;
+    min-width: 10rem !important;
+    width: 10rem !important;
+  }
+
+  .ant-menu-submenu,
+  .ant-menu-submenu-title,
+  .ant-menu-item {
+    &:hover {
+      color: $lightGreen !important;
+      & .ant-menu-submenu-arrow {
+        color: $lightGreen !important;
+      }
+    }
+  }
+
+  .ant-menu-vertical .ant-menu-submenu-selected,
+  .ant-menu-vertical .ant-menu-submenu-active {
+    color: $lightGreen;
+  }
+
+  .ant-menu-submenu-selected,
+  .ant-menu-item-selected {
+    color: $lightGreen;
+    & .ant-menu-submenu-arrow {
+      color: $lightGreen;
+    }
+  }
+
+  .ant-menu-item-selected::after {
+    border-right-color: $lightGreen !important;
+  }
+
+  .ant-menu-item {
+    &:active {
+      background-color: $darkGreen !important;
+    }
+  }
+
+  .ant-menu-item-selected {
+    background-color: $darkGreen !important;
+  }
+
+  .ant-menu-title-content {
+    font-weight: 300;
+    font-family: Gluten;
+  }
+
+  .ant-menu-inline-collapsed-noicon {
+    font-family: Gluten;
+  }
+}

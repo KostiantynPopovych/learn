@@ -1,5 +1,6 @@
 import { Layout, Menu } from 'antd';
-import React, { memo } from 'react';
+import { memo } from 'react';
+import sm from './sm.module.scss';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -7,8 +8,11 @@ const { Sider } = Layout;
 const SideBar = () => {
   console.log('side');
   return (
-    <Sider collapsible theme="dark">
-      <Menu theme="dark" mode="inline">
+    <Sider collapsible>
+      <div className={sm.Logo}>
+        <span>learn</span>
+      </div>
+      <Menu mode="inline">
         <SubMenu key="sub1" title="subnav 1">
           <Menu.Item key="1">option1</Menu.Item>
           <Menu.Item key="2">option2</Menu.Item>
@@ -26,6 +30,10 @@ const SideBar = () => {
           <Menu.Item key="10">option10</Menu.Item>
           <Menu.Item key="11">option11</Menu.Item>
           <Menu.Item key="12">option12</Menu.Item>
+          <Menu.Item key="13">option13</Menu.Item>
+          <Menu.Item key="14">option14</Menu.Item>
+          <Menu.Item key="15">option15</Menu.Item>
+          <Menu.Item key="16">option16</Menu.Item>
         </SubMenu>
       </Menu>
     </Sider>

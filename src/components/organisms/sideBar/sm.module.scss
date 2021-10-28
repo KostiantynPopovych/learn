@@ -1,4 +1,4 @@
-@import '../../../styles//variables.module.scss';
+@import '../../../styles/variables.scss';
 
 .Logo {
   text-align: center;
@@ -8,12 +8,14 @@
   font-family: Gluten;
 }
 
-:global {
-  .ant-menu {
-    max-height: calc(100 vh - 137 px);
-    overflow: scroll;
-  }
+.AddMenuItem {
+  padding: 0 1.6rem;
+  height: 4rem;
+  width: 100%;
+  font-size: 2.5rem;
+}
 
+:global {
   .ant-layout-sider-collapsed {
     flex: 0 0 10rem !important;
     max-width: 10rem !important;
@@ -37,11 +39,17 @@
     color: $lightGreen;
   }
 
-  .ant-menu-submenu-selected,
-  .ant-menu-item-selected {
-    color: $lightGreen;
-    & .ant-menu-submenu-arrow {
+  .ant-menu {
+    max-height: calc(100vh - 137px);
+    overflow: scroll;
+
+    .ant-menu-submenu-active,
+    .ant-menu-submenu-selected,
+    .ant-menu-item-selected {
       color: $lightGreen;
+      & .ant-menu-submenu-arrow {
+        color: $lightGreen;
+      }
     }
   }
 
@@ -49,6 +57,7 @@
     border-right-color: $lightGreen !important;
   }
 
+  .ant-menu-submenu-title,
   .ant-menu-item {
     &:active {
       background-color: $darkGreen !important;

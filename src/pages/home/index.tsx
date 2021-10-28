@@ -1,5 +1,4 @@
-import { GlobalActionsContext } from 'context/global';
-import { memo, useContext } from 'react';
+import { memo } from 'react';
 import Editor from 'components/organisms/editor';
 import SideBar from 'components/organisms/sideBar';
 

@@ -3,6 +3,8 @@ import { PageHeader } from 'antd';
 import { EditOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { GlobalActionsContext } from 'context/global';
 import { GlobalDataContext } from 'context/global';
+import sharedSm from 'styles/shared.module.scss';
+
 import sm from './sm.module.scss';
 
 const Header = () => {
@@ -18,9 +20,9 @@ const Header = () => {
       extra={
         <button className={sm.Header_Button} onClick={handleToggleIsEditing}>
           {isEditing ? (
-            <CheckCircleOutlined className={sm.Header_Button_Icon} />
+            <CheckCircleOutlined className={sharedSm.Icon} />
           ) : (
-            <EditOutlined className={sm.Header_Button_Icon} />
+            <EditOutlined className={sharedSm.Icon} />
           )}
         </button>
       }

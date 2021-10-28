@@ -1,5 +1,8 @@
 import { Layout, Menu } from 'antd';
 import { memo } from 'react';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import sharedSm from 'styles/shared.module.scss';
+
 import sm from './sm.module.scss';
 
 const { SubMenu } = Menu;
@@ -13,7 +16,13 @@ const SideBar = () => {
         <span>learn</span>
       </div>
       <Menu mode="inline">
+        <button key="zxxc" className={sm.AddMenuItem}>
+          <PlusCircleOutlined className={sharedSm.Icon} />
+        </button>
         <SubMenu key="sub1" title="subnav 1">
+          <button key="zxc" className={sm.AddMenuItem}>
+            <PlusCircleOutlined className={sharedSm.Icon} />
+          </button>
           <Menu.Item key="1">option1</Menu.Item>
           <Menu.Item key="2">option2</Menu.Item>
           <Menu.Item key="3">option3</Menu.Item>

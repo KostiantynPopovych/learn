@@ -1,0 +1,13 @@
+.Container {
+  display: flex;
+  min-height: 100vh;
+
+  &_Right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &_Content {
+    }
+  }
+}

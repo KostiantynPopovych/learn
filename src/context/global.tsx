@@ -1,13 +1,16 @@
 import { createContext, memo, useCallback, useMemo, useState } from 'react';
+import useToggle from "hooks/useToggle";
 
 const defaultDataContextState = {
   markDown: '',
   isEditing: false,
+  isLoading: false
 };
 
 const defaultActionsContextState = {
-  handleToggleIsEditing: () => {},
-  handleSetMarkDown: (newOne: string) => {},
+  setMarkDown: (newOne: string) => {},
+  toggleIsEditing: () => {},
+  toggleIsLoading: () => {},
 };
 
 export const GlobalDataContext = createContext<typeof defaultDataContextState>(
@@ -21,11 +24,9 @@ export const GlobalActionsContext = createContext<
 export default memo(({ children }) => {
   const [markDown, setMarkDown] = useState('');
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, toggleIsEditing] = useToggle();
 
-  const handleToggleIsEditing = useCallback(() => {
-    setIsEditing((prevState) => !prevState);
-  }, []);
+  const [isLoading, toggleIsLoading] = useToggle();
 
   const handleSetMarkDown = useCallback((incoming) => {
     setMarkDown(incoming);
@@ -37,17 +38,19 @@ export default memo(({ children }) => {
         () => ({
           markDown,
           isEditing,
+          isLoading,
         }),
-        [markDown, isEditing],
+        [markDown, isEditing, isLoading],
       )}
     >
       <GlobalActionsContext.Provider
         value={useMemo(
           () => ({
-            handleSetMarkDown,
-            handleToggleIsEditing,
+            setMarkDown: handleSetMarkDown,
+            toggleIsEditing,
+            toggleIsLoading
           }),
-          [handleSetMarkDown, handleToggleIsEditing],
+          [handleSetMarkDown, toggleIsEditing, toggleIsLoading],
         )}
       >
         {children}

@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import 'src/styles/variables.scss';
 
 .Logo {
   text-align: center;
@@ -13,6 +13,10 @@
   height: 4rem;
   width: 100%;
   font-size: 2.5rem;
+}
+
+.Section {
+  position: relative;
 }
 
 :global {

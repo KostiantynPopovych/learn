@@ -1,0 +1,22 @@
+@import "src/styles/variables";
+
+.Pulse {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0.1rem;
+  width: 100%;
+  box-shadow: 0.3rem 0 0.3rem 0.3rem $lightGreen;
+  animation: pulsate 1.5s ease-out infinite;
+  opacity: 0;
+  visibility: hidden;
+
+  &_Visible {
+    visibility: visible;
+  }
+}
+@keyframes pulsate {
+  50% {opacity: 1.0;}
+  100% {opacity: 0.0;}
+}

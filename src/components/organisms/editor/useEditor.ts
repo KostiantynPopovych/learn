@@ -8,15 +8,15 @@ const mdParser = new MarkdownIt();
 const useEditor = () => {
   const { isEditing, markDown } = useContext(GlobalDataContext);
 
-  const { handleSetMarkDown } = useContext(GlobalActionsContext);
+  const { setMarkDown } = useContext(GlobalActionsContext);
 
   const mdEditorRef = useRef<null | MdEditor>(null);
 
   const handleMarkDownChange = useCallback(
     ({ text }) => {
-      handleSetMarkDown(text);
+      setMarkDown(text);
     },
-    [handleSetMarkDown],
+    [setMarkDown],
   );
 
   const handleRenderEditorHTML = useCallback((text) => {

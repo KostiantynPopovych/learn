@@ -23,7 +23,7 @@ const useSideBar =() => {
     if (key !== topicId) {
       push(`/${key}`);
     }
-  }, [push]);
+  }, [push, topicId]);
 
   const handleTopicHover = useCallback(({ key }) => {
     receiveDetails(key)

@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import {initializeApp} from 'firebase/app';
 import {collection, getFirestore} from 'firebase/firestore';
 import {Db} from "constants/db";
 

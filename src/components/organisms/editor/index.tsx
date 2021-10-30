@@ -18,7 +18,7 @@ const Editor = () => {
     <MdEditor
       ref={mdEditorRef}
       renderHTML={handleRenderEditorHTML}
-      defaultValue={markDown}
+      value={markDown}
       onChange={handleMarkDownChange}
       readOnly={!isEditing}
       view={DEFAULT_VIEW}

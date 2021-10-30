@@ -1,8 +1,10 @@
-import {createContext, memo, useCallback, useEffect, useMemo, useState} from 'react';
-import {useParams, useLocation, useRouteMatch} from "react-router-dom";
+import {createContext, memo, useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import useFetch from "hooks/useFetch";
 import {getDoc, doc, DocumentSnapshot, DocumentData} from "firebase/firestore";
 import {topicsCollection} from 'app/firebase';
+import useGetParams from "hooks/useGetParams";
+import ROUTES from "constants/routes";
+import {GlobalActionsContext} from "./global";
 
 const defaultDataContextState = {};
 
@@ -19,17 +21,17 @@ export const TopicDetailsActionsContext = createContext<
   >(defaultActionsContextState);
 
 export default memo(({ children }) => {
-  const { topicId } = useParams<TopicDetailsParams>();
-  const loc = useLocation();
-  console.log(loc);
-  console.log(useRouteMatch());
+  const params = useGetParams<TopicDetailsParams>(ROUTES.home);
+
+  const { setMarkDown } = useContext(GlobalActionsContext);
+
   const [details, setDetails] = useState<KeyValue<TopicDetails>>(defaultDataContextState);
 
   const { request } = useFetch<DocumentSnapshot<DocumentData>>();
 
   const receiveDetails = useCallback(async (id: string) => {
     if (details[id]) return details[id];
-    console.log(details);
+
     const d = doc(topicsCollection, id);
 
     const res = await request(getDoc(d));
@@ -47,17 +49,23 @@ export default memo(({ children }) => {
 
   useEffect(() => {
     (async () => {
-      if (topicId && !details[topicId]) {
-        await receiveDetails(topicId);
+      if (params?.topicId && !details[params.topicId]) {
+        await receiveDetails(params.topicId);
       }
     })();
-  }, [topicId, receiveDetails, details]);
+  }, [params?.topicId, receiveDetails, details]);
+
+  useEffect(() => {
+    if (params?.topicId && details[params.topicId]) {
+      setMarkDown(details[params.topicId].content);
+    }
+  }, [setMarkDown, details, params?.topicId]);
 
   return (
     <TopicDetailsDataContext.Provider
       value={useMemo(
-        () =>  details[topicId],
-        [details, topicId],
+        () =>  details[params?.topicId || ''],
+        [details, params?.topicId],
       )}
     >
       <TopicDetailsActionsContext.Provider

@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const SideBar = () => {
-  const { isLoading, topics, sections, handleTopicClick, handleOpenSection, handleTopicHover } = useSideBar();
+  const { isLoading, topics, sections, handleTopicClick, handleOpenSection, handleTopicHover, details, selectedKeys } = useSideBar();
 
   const renderTopic = useCallback((
     topic => (
@@ -46,7 +46,7 @@ const SideBar = () => {
       </div>
 
       {
-        !!Object.values(sections).length && (<Menu mode="inline">
+        !!Object.values(sections).length && (<Menu mode="inline" selectedKeys={selectedKeys} activeKey={details?.sectionId}>
           <button key="addToSections" className={sm.AddMenuItem}>
             <PlusCircleOutlined className={sharedSm.Icon} />
           </button>

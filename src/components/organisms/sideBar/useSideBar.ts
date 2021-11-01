@@ -2,18 +2,22 @@ import {useCallback, useContext, useMemo} from "react";
 import useSections from "hooks/useSections";
 import useTopics from "hooks/useTopics";
 import {useHistory, useParams} from "react-router-dom";
-import {TopicDetailsActionsContext} from "context/topicsDetails";
+import {TopicDetailsActionsContext, TopicDetailsDataContext} from "context/topicsDetails";
 
 const useSideBar =() => {
   const { sections } = useSections();
 
   const { topicId } = useParams<TopicDetailsParams>();
 
+  const details = useContext(TopicDetailsDataContext);
+
   const { push } = useHistory();
 
   const { receiveDetails } = useContext(TopicDetailsActionsContext);
 
   const { receiveTopics, topics, isLoading } = useTopics();
+
+  const selectedKeys = useMemo(() => ([details?.id]), [details?.id]);
 
   const handleOpenSection = useCallback(async ({ key }) => {
     await receiveTopics(key);
@@ -35,14 +39,18 @@ const useSideBar =() => {
     sections,
     isLoading,
     handleOpenSection,
-    handleTopicHover
+    handleTopicHover,
+    details,
+    selectedKeys
   }), [
     handleTopicClick,
     topics,
     sections,
     isLoading,
     handleOpenSection,
-    handleTopicHover
+    handleTopicHover,
+    details,
+    selectedKeys
   ])
 }
 

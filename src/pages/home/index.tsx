@@ -16,7 +16,7 @@ const Home = () => {
       <SideBar />
       <div className={sm.Container_Right}>
         <Header />
-        <div>
+        <div className={sm.Container_Right_Editor}>
           <Editor />
         </div>
       </div>

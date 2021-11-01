@@ -4,13 +4,13 @@ import {sectionsCollection} from "app/firebase";
 import useFetch from "hooks/useFetch";
 
 const useSections = () => {
-  const { isLoading, errors, request } = useFetch<QuerySnapshot<DocumentData>>();
+  const { isLoading, errors, request } = useFetch();
 
   const [sections, setSections] = useState<KeyValue<Section>>({});
 
   useEffect(() => {
     (async() => {
-      const sectionsDocs = await request(getDocs(sectionsCollection));
+      const sectionsDocs = await request<QuerySnapshot<DocumentData>>(getDocs(sectionsCollection));
 
       let normalizedSections: KeyValue<Section> = {};
 

@@ -7,7 +7,7 @@ import {topicsCollection} from 'app/firebase';
 const GET_TOPICS_QUERY = getQueryStaticParts('sectionId', '==')
 
 const useTopics = () => {
-  const { isLoading, errors, request } = useFetch<QuerySnapshot<DocumentData>>();
+  const { isLoading, errors, request } = useFetch();
 
   const [topics, setTopics] = useState<KeyValue<KeyValue<Topic>>>({});
 
@@ -16,7 +16,7 @@ const useTopics = () => {
 
     const q = query(topicsCollection, where(GET_TOPICS_QUERY.fieldName, GET_TOPICS_QUERY.type, sectionId));
 
-    const topicsDocs = await request(getDocs(q));
+    const topicsDocs = await request<QuerySnapshot<DocumentData>>(getDocs(q));
 
     let normalizedTopics: KeyValue<Topic> = {};
 

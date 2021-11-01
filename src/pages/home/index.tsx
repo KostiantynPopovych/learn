@@ -1,14 +1,14 @@
-import {memo, useContext} from 'react';
+import React, {memo} from 'react';
 import Editor from 'components/organisms/editor';
 import SideBar from 'components/organisms/sideBar';
 import Header from 'components/organisms/header';
 import Pulse from "components/atoms/puls";
-import {GlobalDataContext} from "context/global";
 
 import sm from './sm.module.scss';
+import useHome from "./useHome";
 
 const Home = () => {
-  const { isLoading } = useContext(GlobalDataContext);
+  const { isLoading } = useHome();
 
   return (
     <div className={sm.Container}>

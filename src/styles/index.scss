@@ -10,7 +10,7 @@
 *,
 *::before,
 *::after {
-  cursor: default;
+  cursor: default !important;
   box-sizing: inherit;
 }
 

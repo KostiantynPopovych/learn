@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
+
 import { DEFAULT_VIEW } from './config';
 import useEditor from './useEditor';
 import './sm.module.scss';

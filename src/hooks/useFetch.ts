@@ -1,7 +1,7 @@
 import {useCallback, useContext, useMemo, useState} from "react";
 import {GlobalActionsContext, GlobalDataContext} from "context/global";
 
-const useFetch = <O>(defaultState = null) => {
+const useFetch = () => {
   const { toggleIsLoading } = useContext(GlobalActionsContext);
 
   const { isLoading: isGlobalLoading } = useContext(GlobalDataContext);
@@ -10,9 +10,7 @@ const useFetch = <O>(defaultState = null) => {
 
   const [errors, setErrors] = useState<null | any[]>(null);
 
-  const [result, setResult] = useState<Nullable<O>>(defaultState);
-
-  const request = useCallback(async (promise: Promise<O>, withLocalLoading = false) => {
+  const request = useCallback(async <RO>(promise: Promise<RO>, withLocalLoading = false) => {
     setIsLoading(true);
 
     if (!withLocalLoading && !isGlobalLoading && !isLoading) {
@@ -20,11 +18,7 @@ const useFetch = <O>(defaultState = null) => {
     }
 
     try {
-      const res = await promise;
-
-      setResult(res);
-
-      return res;
+      return await promise;
     } catch (e) {
       setErrors([e]);
     } finally {
@@ -39,12 +33,10 @@ const useFetch = <O>(defaultState = null) => {
   return useMemo(() => ({
     isLoading,
     errors,
-    result,
     request
   }), [
     isLoading,
     errors,
-    result,
     request
   ])
 }

@@ -1,0 +1,20 @@
+.Container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &_Label {
+    text-align: center;
+
+    > span {
+      font-size: 10rem;
+      font-family: Gluten;
+    }
+  }
+
+  &_Input {
+    width: 30vw;
+  }
+}

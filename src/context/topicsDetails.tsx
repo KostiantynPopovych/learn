@@ -22,7 +22,7 @@ export const TopicDetailsActionsContext = createContext<
   >(defaultActionsContextState);
 
 export default memo(({ children }) => {
-  const params = useGetParams<TopicDetailsParams>(ROUTES.home);
+  const params = useGetParams<TopicDetailsParams>(ROUTES.topic.byId);
 
   const { setMarkDown } = useContext(GlobalActionsContext);
 

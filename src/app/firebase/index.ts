@@ -2,13 +2,22 @@ import {initializeApp} from 'firebase/app';
 import {collection, getFirestore} from 'firebase/firestore';
 import {Db} from "constants/db";
 
+const {
+  REACT_APP_API_KEY,
+  REACT_APP_AUTH_DOMAIN,
+  REACT_APP_PROJECT_ID,
+  REACT_APP_STORAGE_BUCKET,
+  REACT_APP_MESSAGING_SENDER_ID,
+  REACT_APP_APP_ID
+} = process.env;
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyD1R3D79WoFOBpluaThHEhVBea6F1U1kGY',
-  authDomain: 'learn-2014c.firebaseapp.com',
-  projectId: 'learn-2014c',
-  storageBucket: 'learn-2014c.appspot.com',
-  messagingSenderId: '390057819549',
-  appId: '1:390057819549:web:ead6207bff1340a1768374',
+  apiKey: REACT_APP_API_KEY,
+  authDomain: REACT_APP_AUTH_DOMAIN,
+  projectId: REACT_APP_PROJECT_ID,
+  storageBucket: REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_MESSAGING_SENDER_ID,
+  appId: REACT_APP_APP_ID,
 };
 
 const firebaseInstance = initializeApp(firebaseConfig);

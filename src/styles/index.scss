@@ -30,6 +30,13 @@ button {
   cursor: default;
 }
 
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   min-height: 100vh;
+  display: flex;
+  background-color: rgb(31, 31, 31);
 }

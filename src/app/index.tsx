@@ -1,22 +1,30 @@
 import { memo } from 'react';
 import GlobalContext from 'context/global';
 import TopicDetailsContext from 'context/topicsDetails';
-import Home from 'pages/home';
+import AuthContext from 'context/auth';
+import Topic from 'pages/topic';
+import Login from 'pages/login';
+import PrivateRoute from 'components/organisms/privateRoute';
+import ROUTES from 'constants/routes';
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, Redirect,
   Route,
   Switch
 } from "react-router-dom";
-
-import './firebase';
 
 const App = () => (
   <Router>
     <GlobalContext>
       <TopicDetailsContext>
-        <Switch>
-          <Route path="/:topicId?" component={Home} />
-        </Switch>
+        <AuthContext>
+          <Switch>
+            <PrivateRoute exact path={ROUTES.topic.byId}>
+              <Topic />
+            </PrivateRoute>
+            <Route exact path={ROUTES.auth._} component={Login} />
+            <Redirect to={ROUTES.topic._} />
+          </Switch>
+        </AuthContext>
       </TopicDetailsContext>
     </GlobalContext>
   </Router>

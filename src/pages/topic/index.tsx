@@ -5,10 +5,10 @@ import Header from 'components/organisms/header';
 import Pulse from "components/atoms/puls";
 
 import sm from './sm.module.scss';
-import useHome from "./useHome";
+import useTopic from "./useTopic";
 
-const Home = () => {
-  const { isLoading } = useHome();
+const Topic = () => {
+  const { isLoading } = useTopic();
 
   return (
     <div className={sm.Container}>
@@ -24,4 +24,4 @@ const Home = () => {
   )
 };
 
-export default memo(Home);
+export default memo(Topic);

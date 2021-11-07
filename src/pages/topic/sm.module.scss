@@ -1,4 +1,6 @@
 .Container {
+  display: flex;
+
   &_Right {
     display: flex;
     flex-direction: column;

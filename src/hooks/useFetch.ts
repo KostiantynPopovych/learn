@@ -6,29 +6,40 @@ const useFetch = () => {
 
   const { isLoading: isGlobalLoading } = useContext(GlobalDataContext);
 
+  const [requestsInPending, setRequestsInPending] = useState(new Set());
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [errors, setErrors] = useState<null | any[]>(null);
 
   const request = useCallback(async <RO>(promise: Promise<RO>, withLocalLoading = false) => {
+    if (requestsInPending.has(promise)) return;
+
     setIsLoading(true);
 
-    if (!withLocalLoading && !isGlobalLoading && !isLoading) {
+    if (!withLocalLoading) {
       toggleIsLoading();
+      setRequestsInPending(requestsInPending.add(promise));
     }
+
+    let res;
 
     try {
-      return await promise;
+      res = await promise;
     } catch (e) {
+      res = e;
       setErrors([e]);
     } finally {
-      if (!withLocalLoading && !isGlobalLoading) {
+
+      if (!withLocalLoading && !!requestsInPending.size) {
         toggleIsLoading();
       }
-
+      requestsInPending.delete(promise);
       setIsLoading(false);
     }
-  }, [isLoading, toggleIsLoading, isGlobalLoading]);
+
+    return res as RO;
+  }, [isLoading, toggleIsLoading, isGlobalLoading, requestsInPending]);
 
   return useMemo(() => ({
     isLoading,

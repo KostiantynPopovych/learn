@@ -1,8 +1,4 @@
 .Container {
-  display: flex;
-  min-height: 100vh;
-  background-color: rgb(31, 31, 31);
-
   &_Right {
     display: flex;
     flex-direction: column;

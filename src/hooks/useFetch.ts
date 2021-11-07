@@ -1,10 +1,8 @@
 import {useCallback, useContext, useMemo, useState} from "react";
-import {GlobalActionsContext, GlobalDataContext} from "context/global";
+import {GlobalActionsContext} from "context/global";
 
 const useFetch = () => {
   const { toggleIsLoading } = useContext(GlobalActionsContext);
-
-  const { isLoading: isGlobalLoading } = useContext(GlobalDataContext);
 
   const [requestsInPending, setRequestsInPending] = useState(new Set());
 
@@ -39,7 +37,7 @@ const useFetch = () => {
     }
 
     return res as RO;
-  }, [isLoading, toggleIsLoading, isGlobalLoading, requestsInPending]);
+  }, [toggleIsLoading, requestsInPending]);
 
   return useMemo(() => ({
     isLoading,

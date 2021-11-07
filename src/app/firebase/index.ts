@@ -29,4 +29,6 @@ const sectionsCollection = collection(db, Db.Sections);
 
 const topicsCollection = collection(db, Db.Topics);
 
-export { firebaseInstance, db, sectionsCollection, topicsCollection };
+const permissionsCollection = collection(db, Db.Permissions);
+
+export { firebaseInstance, db, sectionsCollection, topicsCollection, permissionsCollection };

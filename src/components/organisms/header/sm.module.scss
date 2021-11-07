@@ -7,14 +7,18 @@
 :global {
   .ant-page-header {
     position: sticky;
-  }
 
-  .ant-page-header-heading-title {
-    font-family: Gluten;
-  }
+    &-heading {
+      height: 5.5rem;
 
-  .ant-page-header-heading-sub-title {
-    font-weight: 300;
-    font-family: Gluten;
+      &-title {
+        font-family: Gluten;
+      }
+
+      &-sub-title {
+        font-weight: 300;
+        font-family: Gluten;
+      }
+    }
   }
 }

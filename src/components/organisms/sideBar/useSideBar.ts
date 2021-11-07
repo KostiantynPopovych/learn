@@ -4,6 +4,7 @@ import useTopics from "hooks/useTopics";
 import {useHistory, useParams} from "react-router-dom";
 import {TopicDetailsActionsContext, TopicDetailsDataContext} from "context/topicsDetails";
 import ROUTES from "constants/routes";
+import {AuthDataContext} from "context/auth";
 
 const useSideBar =() => {
   const { sections } = useSections();
@@ -12,7 +13,11 @@ const useSideBar =() => {
 
   const details = useContext(TopicDetailsDataContext);
 
+  const { user } = useContext(AuthDataContext);
+
   const { push } = useHistory();
+
+  const canCreate = useMemo(() => user?.permissions.write, [user]);
 
   const { receiveDetails } = useContext(TopicDetailsActionsContext);
 
@@ -42,7 +47,8 @@ const useSideBar =() => {
     handleOpenSection,
     handleTopicHover,
     details,
-    selectedKeys
+    selectedKeys,
+    canCreate
   }), [
     handleTopicClick,
     topics,
@@ -51,7 +57,8 @@ const useSideBar =() => {
     handleOpenSection,
     handleTopicHover,
     details,
-    selectedKeys
+    selectedKeys,
+    canCreate
   ])
 }
 

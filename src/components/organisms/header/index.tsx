@@ -7,7 +7,7 @@ import sm from './sm.module.scss';
 import useHeader from "./useHeader";
 
 const Header = () => {
-  const { isEditing, toggleIsEditing, subTitle, title, handleSaveClick } = useHeader();
+  const { isEditing, toggleIsEditing, subTitle, title, handleSaveClick, canEdit } = useHeader();
 
   return (
     <PageHeader
@@ -15,7 +15,7 @@ const Header = () => {
       title={title}
       subTitle={subTitle}
       extra={
-        subTitle ? (
+        canEdit && subTitle ? (
           <button className={sm.Header_Button} onClick={isEditing ? handleSaveClick : toggleIsEditing}>
             {isEditing ? (
               <CheckCircleOutlined className={sharedSm.Icon} />

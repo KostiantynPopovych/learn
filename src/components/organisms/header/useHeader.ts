@@ -2,11 +2,16 @@ import {useCallback, useContext, useMemo} from "react";
 import {GlobalActionsContext, GlobalDataContext} from "context/global";
 import {TopicDetailsActionsContext, TopicDetailsDataContext} from "context/topicsDetails";
 import useSections from "hooks/useSections";
+import {AuthDataContext} from "context/auth";
 
 const useHeader = () => {
   const { toggleIsEditing } = useContext(GlobalActionsContext);
 
   const { isEditing, markDown } = useContext(GlobalDataContext);
+
+  const { user } = useContext(AuthDataContext);
+
+  const canEdit = useMemo(() => user?.permissions.write, [user]);
 
   const details = useContext(TopicDetailsDataContext);
 
@@ -29,8 +34,10 @@ const useHeader = () => {
     toggleIsEditing,
     subTitle: details?.name,
     title: sections[details?.sectionId || '']?.name,
-    handleSaveClick
+    handleSaveClick,
+    canEdit
   }), [
+    canEdit,
     sections,
     details,
     isEditing,

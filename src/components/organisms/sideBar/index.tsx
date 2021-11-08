@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const SideBar = () => {
-  const { isLoading, topics, sections, handleTopicClick, handleOpenSection, handleTopicHover, details, selectedKeys, canCreate } = useSideBar();
+  const { topics, sections, handleTopicClick, handleOpenSection, handleTopicHover, details, selectedKeys, canCreate } = useSideBar();
 
   const renderTopic = useCallback((
     topic => (
@@ -37,7 +37,7 @@ const SideBar = () => {
         }
       </SubMenu>
     )
-  , [handleOpenSection, topics, renderTopic, isLoading, canCreate]);
+  , [handleOpenSection, topics, renderTopic, canCreate]);
 
   return (
     <Sider collapsible>

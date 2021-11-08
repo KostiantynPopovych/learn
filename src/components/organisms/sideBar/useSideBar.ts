@@ -21,7 +21,7 @@ const useSideBar =() => {
 
   const { receiveDetails } = useContext(TopicDetailsActionsContext);
 
-  const { receiveTopics, topics, isLoading } = useTopics();
+  const { receiveTopics, topics } = useTopics();
 
   const selectedKeys = useMemo(() => ([details?.id]), [details?.id]);
 
@@ -43,7 +43,6 @@ const useSideBar =() => {
     handleTopicClick,
     topics,
     sections,
-    isLoading,
     handleOpenSection,
     handleTopicHover,
     details,
@@ -53,7 +52,6 @@ const useSideBar =() => {
     handleTopicClick,
     topics,
     sections,
-    isLoading,
     handleOpenSection,
     handleTopicHover,
     details,

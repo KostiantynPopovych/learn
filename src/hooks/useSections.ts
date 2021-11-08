@@ -29,7 +29,7 @@ const useSections = () => {
 
       setSections(normalizedSections);
     })()
-  }, []);
+  }, [request]);
 
   return useMemo(() => ({
     sections,

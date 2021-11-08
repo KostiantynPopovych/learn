@@ -1,11 +1,11 @@
 import { useForm, Controller } from 'react-hook-form';
 import {memo} from 'react';
-import {LoginProps} from "./loginTypes";
+import {SingleInputProps} from "./singleInput";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import {FIELDS} from "./config";
 
-const Login = ({onSubmit}: LoginProps) => {
+const SingleInput = ({onSubmit}: SingleInputProps) => {
   const { handleSubmit, control, } = useForm();
 
   return (
@@ -27,4 +27,4 @@ const Login = ({onSubmit}: LoginProps) => {
   )
 };
 
-export default memo(Login);
+export default memo(SingleInput);

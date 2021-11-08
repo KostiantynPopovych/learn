@@ -6,10 +6,12 @@ import {topicsCollection} from 'app/firebase';
 
 const GET_TOPICS_QUERY = getQueryStaticParts('sectionId', '==')
 
+const TOPICS = {};
+
 const useTopics = () => {
   const { isLoading, errors, request } = useFetch();
 
-  const [topics, setTopics] = useState<KeyValue<KeyValue<Topic>>>({});
+  const [topics, setTopics] = useState<KeyValue<KeyValue<Topic>>>(TOPICS);
 
   const receiveTopics = useCallback(async (sectionId: string) => {
     if (topics[sectionId]) return topics[sectionId];

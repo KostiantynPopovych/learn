@@ -28,7 +28,7 @@ const SideBar = () => {
         onTitleClick={handleOpenSection}
       >
         {
-          canCreate && !isLoading && <button key={`addTo-${section.id}`} className={sm.AddMenuItem}>
+          canCreate && !!Object.values(topics[section.id] || {}).length && <button key={`addTo-${section.id}`} className={sm.AddMenuItem}>
               <PlusCircleOutlined className={sharedSm.Icon} />
           </button>
         }
@@ -37,7 +37,7 @@ const SideBar = () => {
         }
       </SubMenu>
     )
-  , [handleOpenSection, topics, renderTopic, isLoading]);
+  , [handleOpenSection, topics, renderTopic, isLoading, canCreate]);
 
   return (
     <Sider collapsible>

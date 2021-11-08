@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import LoginForm from 'components/organisms/form/login';
+import SingleInputForm from 'components/organisms/form/singleInput';
 import useLogin  from "./useLogin";
 import sm from './styles.module.scss';
 import Pulse from "components/atoms/puls";
@@ -14,7 +14,7 @@ const Login = () => {
         <span>learn</span>
       </div>
       <div className={sm.Container_Input}>
-        <LoginForm onSubmit={handleSubmitForm} />
+        <SingleInputForm onSubmit={handleSubmitForm} />
       </div>
     </div>
   )

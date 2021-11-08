@@ -1,5 +1,5 @@
 import React, {useState, useEffect, createContext, memo, useCallback, useMemo, useContext} from 'react';
-import {getAuth, signInWithEmailLink, sendSignInLinkToEmail, signOut, User} from 'firebase/auth';
+import {getAuth, signInWithEmailLink, sendSignInLinkToEmail, signOut} from 'firebase/auth';
 import {firebaseInstance, permissionsCollection} from 'app/firebase';
 import {useHistory} from "react-router-dom";
 import {GlobalActionsContext} from "./global";
@@ -112,7 +112,7 @@ export default memo(({ children }) => {
 
     return () => unsubscribe();
   }, [location, replace, getUserPermissions]);
-  console.log(user);
+
   return (
     <AuthDataContext.Provider value={useMemo(() => ({
       user, isInitializing

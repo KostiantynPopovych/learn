@@ -1,12 +1,30 @@
-import React, {useState, useEffect, createContext, memo, useCallback, useMemo, useContext} from 'react';
-import {getAuth, signInWithEmailLink, sendSignInLinkToEmail, signOut} from 'firebase/auth';
-import {firebaseInstance, permissionsCollection} from 'app/firebase';
-import {useHistory} from "react-router-dom";
-import {GlobalActionsContext} from "./global";
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  memo,
+  useCallback,
+  useMemo,
+  useContext,
+} from 'react';
+import {
+  getAuth,
+  signInWithEmailLink,
+  sendSignInLinkToEmail,
+  signOut,
+} from 'firebase/auth';
+import { firebaseInstance, permissionsCollection } from 'app/firebase';
+import { useHistory } from 'react-router-dom';
+import { GlobalActionsContext } from './global';
 import ROUTES from 'constants/routes';
-import {UserPermissions, UserWithPermissions} from "types/user";
-import {doc, DocumentData, DocumentSnapshot, getDoc} from "firebase/firestore";
-import useFetch from "hooks/useFetch";
+import { UserPermissions, UserWithPermissions } from 'types/user';
+import {
+  doc,
+  DocumentData,
+  DocumentSnapshot,
+  getDoc,
+} from 'firebase/firestore';
+import useFetch from 'hooks/useFetch';
 
 const auth = getAuth(firebaseInstance);
 
@@ -14,8 +32,8 @@ const INPUT = 'INPUT';
 
 const DEFAULT_PERMISSIONS: UserPermissions = {
   write: false,
-  create: false
-}
+  create: false,
+};
 
 const defaultDataContextState = {
   user: null as Nullable<UserWithPermissions>,
@@ -34,8 +52,7 @@ export const AuthDataContext = createContext<typeof defaultDataContextState>(
 
 export const AuthActionsContext = createContext<
   typeof defaultActionsContextState
-  >(defaultActionsContextState);
-
+>(defaultActionsContextState);
 
 export default memo(({ children }) => {
   const [user, setUser] = useState<Nullable<UserWithPermissions>>(null);
@@ -48,40 +65,50 @@ export default memo(({ children }) => {
 
   const { replace, location } = useHistory();
 
-  const sendLink = useCallback(async (email) => {
-    toggleIsLoading();
-    await sendSignInLinkToEmail(auth, email, {
+  const sendLink = useCallback(
+    async (email) => {
+      toggleIsLoading();
+      await sendSignInLinkToEmail(auth, email, {
         url: `${window.location.origin}${ROUTES.auth._}`,
         handleCodeInApp: true,
-      })
+      });
 
-    localStorage.setItem(INPUT, email);
-    toggleIsLoading();
-  }, [toggleIsLoading]);
+      localStorage.setItem(INPUT, email);
+      toggleIsLoading();
+    },
+    [toggleIsLoading],
+  );
 
-  const getUserPermissions = useCallback(async (id: string) => {
-    const d = doc(permissionsCollection, id);
-    return await request<DocumentSnapshot<DocumentData>>(getDoc(d));
-  }, [request]);
+  const getUserPermissions = useCallback(
+    async (id: string) => {
+      const d = doc(permissionsCollection, id);
+      return await request<DocumentSnapshot<DocumentData>>(getDoc(d));
+    },
+    [request],
+  );
 
-  const signIn = useCallback(async (code) => {
-    toggleIsLoading()
+  const signIn = useCallback(
+    async (code) => {
+      toggleIsLoading();
 
-    const input = localStorage.getItem(INPUT);
+      const input = localStorage.getItem(INPUT);
 
-    const result = await signInWithEmailLink(auth, input as string, code);
+      const result = await signInWithEmailLink(auth, input as string, code);
 
-    const permissionsResult = await getUserPermissions(result.user.uid);
+      const permissionsResult = await getUserPermissions(result.user.uid);
 
-    setUser({
-      ...result.user,
-      permissions: permissionsResult?.data() as UserPermissions || DEFAULT_PERMISSIONS
-    });
+      setUser({
+        ...result.user,
+        permissions:
+          (permissionsResult?.data() as UserPermissions) || DEFAULT_PERMISSIONS,
+      });
 
-    localStorage.removeItem(INPUT);
-    toggleIsLoading();
-    replace(ROUTES.topic._);
-  }, [replace, toggleIsLoading, getUserPermissions]);
+      localStorage.removeItem(INPUT);
+      toggleIsLoading();
+      replace(ROUTES.topic._);
+    },
+    [replace, toggleIsLoading, getUserPermissions],
+  );
 
   const logout = useCallback(async () => {
     toggleIsLoading();
@@ -91,15 +118,17 @@ export default memo(({ children }) => {
   }, [toggleIsLoading]);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async user => {
-      let permissionsResult
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      let permissionsResult;
 
       if (user) {
         permissionsResult = await getUserPermissions(user.uid);
 
         setUser({
           ...user,
-          permissions: permissionsResult?.data() as UserPermissions|| DEFAULT_PERMISSIONS
+          permissions:
+            (permissionsResult?.data() as UserPermissions) ||
+            DEFAULT_PERMISSIONS,
         });
       }
 
@@ -114,17 +143,26 @@ export default memo(({ children }) => {
   }, [location, replace, getUserPermissions]);
 
   return (
-    <AuthDataContext.Provider value={useMemo(() => ({
-      user, isInitializing
-    }), [user,isInitializing])}>
-      <AuthActionsContext.Provider value={useMemo(() => ({
-        sendLink,
-        signIn,
-        logout,
-      }), [ sendLink,
-        signIn,
-        logout])}>
-      {children}
+    <AuthDataContext.Provider
+      value={useMemo(
+        () => ({
+          user,
+          isInitializing,
+        }),
+        [user, isInitializing],
+      )}
+    >
+      <AuthActionsContext.Provider
+        value={useMemo(
+          () => ({
+            sendLink,
+            signIn,
+            logout,
+          }),
+          [sendLink, signIn, logout],
+        )}
+      >
+        {children}
       </AuthActionsContext.Provider>
     </AuthDataContext.Provider>
   );

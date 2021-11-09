@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import SingleInputForm from 'components/organisms/form/singleInput';
-import useLogin  from "./useLogin";
+import useLogin from './useLogin';
 import sm from './styles.module.scss';
-import Pulse from "components/atoms/puls";
+import Pulse from 'components/atoms/puls';
 
 const Login = () => {
-  const {handleSubmitForm, isLoading} = useLogin();
+  const { handleSubmitForm, isLoading } = useLogin();
 
   return (
     <div className={sm.Container}>
@@ -17,7 +17,7 @@ const Login = () => {
         <SingleInputForm onSubmit={handleSubmitForm} />
       </div>
     </div>
-  )
+  );
 };
 
 export default memo(Login);

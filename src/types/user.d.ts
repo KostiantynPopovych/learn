@@ -1,4 +1,4 @@
-import {User} from 'firebase/auth';
+import { User } from 'firebase/auth';
 
 interface UserPermissions {
   write: boolean;
@@ -6,5 +6,5 @@ interface UserPermissions {
 }
 
 interface UserWithPermissions extends User {
-  permissions: UserPermissions
+  permissions: UserPermissions;
 }

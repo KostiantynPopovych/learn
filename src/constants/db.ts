@@ -1,7 +1,7 @@
 enum Db {
   Sections = 'sections',
   Topics = 'topics',
-  Permissions = 'permissions'
+  Permissions = 'permissions',
 }
 
 export { Db };

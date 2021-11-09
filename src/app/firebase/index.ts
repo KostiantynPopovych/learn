@@ -1,6 +1,6 @@
-import {initializeApp} from 'firebase/app';
-import {collection, getFirestore} from 'firebase/firestore';
-import {Db} from "constants/db";
+import { initializeApp } from 'firebase/app';
+import { collection, getFirestore } from 'firebase/firestore';
+import { Db } from 'constants/db';
 
 const {
   REACT_APP_API_KEY,
@@ -8,7 +8,7 @@ const {
   REACT_APP_PROJECT_ID,
   REACT_APP_STORAGE_BUCKET,
   REACT_APP_MESSAGING_SENDER_ID,
-  REACT_APP_APP_ID
+  REACT_APP_APP_ID,
 } = process.env;
 
 const firebaseConfig = {
@@ -31,4 +31,10 @@ const topicsCollection = collection(db, Db.Topics);
 
 const permissionsCollection = collection(db, Db.Permissions);
 
-export { firebaseInstance, db, sectionsCollection, topicsCollection, permissionsCollection };
+export {
+  firebaseInstance,
+  db,
+  sectionsCollection,
+  topicsCollection,
+  permissionsCollection,
+};

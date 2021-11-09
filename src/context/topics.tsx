@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, memo, useState, useMemo, createContext } from 'react';
 import {
   DocumentData,
   getDocs,
@@ -18,8 +18,25 @@ const GET_FILTERED_TOPICS_QUERY = getQueryStaticParts('isArchived', '!=');
 
 const TOPICS_INITIAL_STATE = {};
 
-const useTopics = () => {
-  const { isLoading, request } = useFetch();
+const defaultDataContextState = {
+  topics: {} as KeyValue<KeyValue<Topic>>,
+};
+
+const defaultActionsContextState = {
+  receiveTopics: (sectionId: string) => {},
+  handleManageTopic: (action: ActionType, topic: Partial<Topic>) => {},
+};
+
+export const TopicsDataContext = createContext<typeof defaultDataContextState>(
+  defaultDataContextState,
+);
+
+export const TopicsActionsContext = createContext<
+  typeof defaultActionsContextState
+>(defaultActionsContextState);
+
+export default memo(({ children }) => {
+  const { request } = useFetch();
 
   const [topics, setTopics] =
     useState<KeyValue<KeyValue<Topic>>>(TOPICS_INITIAL_STATE);
@@ -68,45 +85,55 @@ const useTopics = () => {
     [topics, request],
   );
 
-  const handleManageTopic = useCallback(
-    (type: ActionType, topic) => {
+  const handleManageTopic = useCallback((type: ActionType, topic) => {
+    setTopics((prevState) => {
       if (type === ActionType.Delete) {
-        const { [topic.id]: exclude, ...rest } = topics[topic.sectionId];
+        const { [topic.id]: exclude, ...rest } = prevState[topic.sectionId];
 
-        return setTopics({
-          ...topics,
+        return {
+          ...prevState,
           [topic.sectionId]: {
             ...rest,
           },
-        });
+        };
       }
 
-      setTopics({
-        ...topics,
+      return {
+        ...prevState,
         [topic.sectionId]: {
-          ...topics[topic.sectionId],
+          ...prevState[topic.sectionId],
           [topic.id]:
             type === ActionType.Add
               ? topic
               : {
-                  ...topics[topic.id],
-                  topic,
+                  ...prevState[topic.id],
+                  ...topic,
                 },
         },
-      });
-    },
-    [topics],
-  );
+      };
+    });
+  }, []);
 
-  return useMemo(
-    () => ({
-      topics,
-      isLoading,
-      receiveTopics,
-      handleManageTopic,
-    }),
-    [topics, isLoading, receiveTopics, handleManageTopic],
+  return (
+    <TopicsDataContext.Provider
+      value={useMemo(
+        () => ({
+          topics,
+        }),
+        [topics],
+      )}
+    >
+      <TopicsActionsContext.Provider
+        value={useMemo(
+          () => ({
+            receiveTopics,
+            handleManageTopic,
+          }),
+          [receiveTopics, handleManageTopic],
+        )}
+      >
+        {children}
+      </TopicsActionsContext.Provider>
+    </TopicsDataContext.Provider>
   );
-};
-
-export default useTopics;
+});

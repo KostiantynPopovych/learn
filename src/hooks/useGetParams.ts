@@ -1,5 +1,5 @@
-import {useRouteMatch} from "react-router-dom";
-import {useMemo} from "react";
+import { useRouteMatch } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const useGetParams = <T>(path: string) => {
   const match = useRouteMatch(path);

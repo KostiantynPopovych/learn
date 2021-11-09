@@ -17,9 +17,53 @@
 
 .Section {
   position: relative;
+
+  &_Edit {
+    margin-right: 1rem;
+  }
+
+  &_Content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &_Icon {
+      display: block;
+    }
+  }
+}
+
+.Topic {
+  &_Edit {
+    margin-right: 1rem;
+  }
+}
+
+.Background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+
+  &_Content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+  }
 }
 
 :global {
+  .ant-menu-submenu-arrow {
+    display: none;
+  }
+
+  .ant-menu-submenu-title {
+    padding-left: 2.4rem !important;
+  }
+
   .ant-layout-sider-collapsed {
     flex: 0 0 10rem !important;
     max-width: 10rem !important;
@@ -79,5 +123,9 @@
 
   .ant-menu-inline-collapsed-noicon {
     font-family: Gluten;
+  }
+
+  .ant-menu-item {
+    padding-left: 3.6rem !important;
   }
 }

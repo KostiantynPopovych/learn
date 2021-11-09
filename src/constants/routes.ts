@@ -1,11 +1,11 @@
 const ROUTES = {
   topic: {
     _: '/topic',
-    byId: '/topic/:topicId?'
+    byId: '/topic/:topicId?',
   },
   auth: {
-    _: '/auth'
-  }
-}
+    _: '/auth',
+  },
+};
 
 export default ROUTES;

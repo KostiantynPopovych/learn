@@ -1,13 +1,24 @@
-import {useCallback, useContext, useMemo} from "react";
-import useSections from "hooks/useSections";
-import useTopics from "hooks/useTopics";
-import {useHistory, useParams} from "react-router-dom";
-import {TopicDetailsActionsContext, TopicDetailsDataContext} from "context/topicsDetails";
-import ROUTES from "constants/routes";
-import {AuthDataContext} from "context/auth";
+import { useCallback, useContext, useMemo, useRef } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import {
+  TopicDetailsActionsContext,
+  TopicDetailsDataContext,
+} from 'context/topicsDetails';
+import ROUTES from 'constants/routes';
+import { AuthDataContext } from 'context/auth';
+import useManageEntities from 'hooks/useManageEntities';
+import { SectionsDataContext } from 'context/sections';
+import { TopicsActionsContext, TopicsDataContext } from 'context/topics';
 
-const useSideBar =() => {
-  const { sections } = useSections();
+const useSideBar = () => {
+  const {
+    activeAction,
+    handleManageEntityClick,
+    handleAddEditEntity,
+    handleResetAction,
+  } = useManageEntities();
+
+  const formWrapRef = useRef<Nullable<HTMLDivElement>>(null);
 
   const { topicId } = useParams<TopicDetailsParams>();
 
@@ -15,49 +26,87 @@ const useSideBar =() => {
 
   const { user } = useContext(AuthDataContext);
 
+  const { sections } = useContext(SectionsDataContext);
+
   const { push } = useHistory();
 
   const canCreate = useMemo(() => user?.permissions.write, [user]);
 
   const { receiveDetails } = useContext(TopicDetailsActionsContext);
 
-  const { receiveTopics, topics } = useTopics();
+  const { topics } = useContext(TopicsDataContext);
 
-  const selectedKeys = useMemo(() => ([details?.id]), [details?.id]);
+  const { receiveTopics } = useContext(TopicsActionsContext);
 
-  const handleOpenSection = useCallback(async ({ key }) => {
-    await receiveTopics(key);
-  }, [receiveTopics])
+  const selectedKeys = useMemo(() => [details?.id], [details?.id]);
 
-  const handleTopicClick = useCallback(({ key }) => {
-    if (key !== topicId) {
-      push(ROUTES.topic.byId.replace(':topicId', key));
-    }
-  }, [push, topicId]);
+  const formInitialValues = useMemo(
+    () =>
+      activeAction?.content
+        ? {
+            input: activeAction.content,
+          }
+        : undefined,
+    [activeAction],
+  );
 
-  const handleTopicHover = useCallback(({ key }) => {
-    receiveDetails(key)
-  }, [receiveDetails]);
+  const handleOpenSection = useCallback(
+    async ({ key }) => {
+      await receiveTopics(key);
+    },
+    [receiveTopics],
+  );
 
-  return useMemo(() => ({
-    handleTopicClick,
-    topics,
-    sections,
-    handleOpenSection,
-    handleTopicHover,
-    details,
-    selectedKeys,
-    canCreate
-  }), [
-    handleTopicClick,
-    topics,
-    sections,
-    handleOpenSection,
-    handleTopicHover,
-    details,
-    selectedKeys,
-    canCreate
-  ])
-}
+  const handleTopicClick = useCallback(
+    ({ key }) => {
+      if (key !== topicId) {
+        push(ROUTES.topic.byId.replace(':topicId', key));
+      }
+    },
+    [push, topicId],
+  );
+
+  const handleTopicHover = useCallback(
+    ({ key }) => {
+      receiveDetails(key);
+    },
+    [receiveDetails],
+  );
+
+  return useMemo(
+    () => ({
+      handleTopicClick,
+      topics,
+      sections,
+      handleOpenSection,
+      handleTopicHover,
+      details,
+      selectedKeys,
+      canCreate,
+      handleManageEntityClick,
+      activeAction,
+      handleAddEditEntity,
+      formInitialValues,
+      formWrapRef,
+      handleResetAction,
+    }),
+    [
+      handleTopicClick,
+      topics,
+      sections,
+      handleOpenSection,
+      handleTopicHover,
+      details,
+      selectedKeys,
+      canCreate,
+      handleManageEntityClick,
+      activeAction,
+      handleAddEditEntity,
+      formInitialValues,
+      formWrapRef,
+      handleResetAction,
+    ],
+  );
+};
 
 export default useSideBar;

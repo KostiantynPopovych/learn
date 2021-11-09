@@ -1,11 +1,11 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import Editor from 'components/organisms/editor';
 import SideBar from 'components/organisms/sideBar';
 import Header from 'components/organisms/header';
-import Pulse from "components/atoms/puls";
+import Pulse from 'components/atoms/puls';
 
 import sm from './sm.module.scss';
-import useTopic from "./useTopic";
+import useTopic from './useTopic';
 
 const Topic = () => {
   const { isLoading } = useTopic();
@@ -21,7 +21,7 @@ const Topic = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default memo(Topic);

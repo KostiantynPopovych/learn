@@ -1,10 +1,10 @@
 import { createContext, memo, useCallback, useMemo, useState } from 'react';
-import useToggle from "hooks/useToggle";
+import useToggle from 'hooks/useToggle';
 
 const defaultDataContextState = {
   markDown: '',
   isEditing: false,
-  isLoading: false
+  isLoading: false,
 };
 
 const defaultActionsContextState = {
@@ -48,7 +48,7 @@ export default memo(({ children }) => {
           () => ({
             setMarkDown: handleSetMarkDown,
             toggleIsEditing,
-            toggleIsLoading
+            toggleIsLoading,
           }),
           [handleSetMarkDown, toggleIsEditing, toggleIsLoading],
         )}

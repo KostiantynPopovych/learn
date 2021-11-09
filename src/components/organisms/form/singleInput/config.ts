@@ -1,7 +1,10 @@
 const FIELDS = {
   INPUT: {
-    name: 'input'
-  }
-}
+    name: 'input',
+    validationRules: {
+      required: true,
+    },
+  },
+};
 
 export { FIELDS };

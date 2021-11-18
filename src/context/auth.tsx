@@ -69,7 +69,7 @@ export default memo(({ children }) => {
     async (email) => {
       toggleIsLoading();
       await sendSignInLinkToEmail(auth, email, {
-        url: `${window.location.origin}${ROUTES.auth._}`,
+        url: window.location.href,
         handleCodeInApp: true,
       });
 

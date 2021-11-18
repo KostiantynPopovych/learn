@@ -32,7 +32,6 @@ const SideBar = () => {
     handleAddEditEntity,
     formInitialValues,
     formWrapRef,
-    handleResetAction,
   } = useSideBar();
 
   const renderTopic = useCallback(
@@ -139,6 +138,7 @@ const SideBar = () => {
       handleManageEntityClick,
     ],
   );
+  console.log(activeAction);
 
   return (
     <>

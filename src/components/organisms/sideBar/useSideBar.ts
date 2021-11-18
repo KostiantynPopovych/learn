@@ -9,6 +9,7 @@ import { AuthDataContext } from 'context/auth';
 import useManageEntities from 'hooks/useManageEntities';
 import { SectionsDataContext } from 'context/sections';
 import { TopicsActionsContext, TopicsDataContext } from 'context/topics';
+import useClickOutside from 'hooks/useClickOutside';
 
 const useSideBar = () => {
   const {
@@ -72,6 +73,8 @@ const useSideBar = () => {
     },
     [receiveDetails],
   );
+
+  useClickOutside(formWrapRef, activeAction ? handleResetAction : () => {});
 
   return useMemo(
     () => ({

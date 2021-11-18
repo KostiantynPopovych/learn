@@ -1,4 +1,10 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import {
+  SyntheticEvent,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import {
   ActionEntity,
@@ -99,7 +105,9 @@ const useManageEntities = () => {
   );
 
   const handleManageEntityClick = useCallback(
-    (params: SideBarActiveAction) => () => {
+    (params: SideBarActiveAction) => (ev: SyntheticEvent) => {
+      ev.stopPropagation();
+
       const cbs = {
         [ActionType.Add]: setActiveAction,
         [ActionType.Edit]: setActiveAction,

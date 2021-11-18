@@ -2,7 +2,7 @@
   "name": "learn",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://malachitetrip.github.io/idp",
+  "homepage": "https://malachitetrip.github.io/learn",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@types/node": "^12.0.0",

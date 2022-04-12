@@ -135,12 +135,18 @@ export default memo(({ children }) => {
       setIsInitializing(false);
 
       if (user && location.pathname.includes(ROUTES.auth._)) {
-        replace(ROUTES.topic._);
+        window.location.replace('/');
       }
     });
 
     return () => unsubscribe();
-  }, [location, replace, getUserPermissions]);
+  }, [replace, location, getUserPermissions]);
+
+  useEffect(() => {
+    if (window.location.search && window.location.hash === `#${ROUTES.auth._}`) {
+      window.location.replace(`${window.location.hash}${window.location.search}`);
+    }
+  }, [window.location.search]);
 
   return (
     <AuthDataContext.Provider

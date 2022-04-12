@@ -135,7 +135,7 @@ export default memo(({ children }) => {
       setIsInitializing(false);
 
       if (user && location.pathname.includes(ROUTES.auth._)) {
-        window.location.replace('/');
+        window.location.replace('/#/topic');
       }
     });
 

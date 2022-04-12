@@ -65,8 +65,8 @@ export default memo(({ children }) => {
 
       let normalizedSections: KeyValue<Section> = {};
 
-      if (sectionsDocs) {
-        sectionsDocs.forEach((doc) => {
+      if (sectionsDocs && Array.isArray(sectionsDocs?.docs)) {
+        sectionsDocs.docs.forEach((doc) => {
           const { name } = doc.data();
           normalizedSections = {
             ...normalizedSections,

@@ -138,7 +138,6 @@ const SideBar = () => {
       handleManageEntityClick,
     ],
   );
-  console.log(activeAction);
 
   return (
     <>

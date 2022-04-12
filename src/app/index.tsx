@@ -5,7 +5,7 @@ import Login from 'pages/login';
 import PrivateRoute from 'components/organisms/privateRoute';
 import ROUTES from 'constants/routes';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Redirect,
   Route,
   Switch,

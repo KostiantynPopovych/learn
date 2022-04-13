@@ -16,7 +16,7 @@ const Editor = () => {
   } = useEditor();
 
   return (
-    <div className={!isEditing ? sm.Center : undefined}>
+    <div className={!isEditing ? sm.Center : sm.Editing}>
       <MdEditor
         ref={mdEditorRef}
         renderHTML={handleRenderEditorHTML}

@@ -4,7 +4,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 
 import { DEFAULT_VIEW } from './config';
 import useEditor from './useEditor';
-import './sm.module.scss';
+import sm from './sm.module.scss';
 
 const Editor = () => {
   const {
@@ -16,14 +16,16 @@ const Editor = () => {
   } = useEditor();
 
   return (
-    <MdEditor
-      ref={mdEditorRef}
-      renderHTML={handleRenderEditorHTML}
-      value={markDown}
-      onChange={handleMarkDownChange}
-      readOnly={!isEditing}
-      view={DEFAULT_VIEW}
-    />
+    <div className={!isEditing ? sm.Center : undefined}>
+      <MdEditor
+        ref={mdEditorRef}
+        renderHTML={handleRenderEditorHTML}
+        value={markDown}
+        onChange={handleMarkDownChange}
+        readOnly={!isEditing}
+        view={DEFAULT_VIEW}
+      />
+    </div>
   );
 };
 

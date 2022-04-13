@@ -4,7 +4,7 @@ import { SingleInputProps, SingleInputInitialValues } from './singleInput';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import { FIELDS } from './config';
-import './styles.module.scss';
+import sm from './styles.module.scss';
 
 const SingleInput = ({ onSubmit, initialValues }: SingleInputProps) => {
   const { handleSubmit, control } = useForm({ defaultValues: initialValues });
@@ -14,7 +14,7 @@ const SingleInput = ({ onSubmit, initialValues }: SingleInputProps) => {
       <Input
         {...field}
         addonAfter={
-          <button type="submit">
+          <button className={sm.Button} type="submit">
             <ArrowRightOutlined />
           </button>
         }

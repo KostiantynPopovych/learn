@@ -146,7 +146,7 @@ export default memo(({ children }) => {
     if (window.location.search && window.location.hash === `#${ROUTES.auth._}`) {
       window.location.replace(`${window.location.hash}${window.location.search}`);
     }
-  }, [window.location.search]);
+  }, []);
 
   return (
     <AuthDataContext.Provider

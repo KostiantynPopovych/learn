@@ -2,9 +2,15 @@
 
 :global {
   .ant-input {
+    background-color: $background;
+
     &:focus,
     &:hover {
       border-color: $lightGreen !important;
     }
+  }
+
+  .ant-input-group-addon {
+    background-color: $background;
   }
 }

@@ -38,6 +38,7 @@ const SideBar = () => {
     (topic) => (
       <Menu.Item
         icon={
+        canCreate ?
           <Popover
             key={topic.id}
             className={sm.Topic}
@@ -66,7 +67,7 @@ const SideBar = () => {
           >
             <SettingFilled />
           </Popover>
-        }
+        : undefined}
         onMouseEnter={handleTopicHover}
         onClick={handleTopicClick}
         key={topic.id}
@@ -74,7 +75,7 @@ const SideBar = () => {
         {topic.name}
       </Menu.Item>
     ),
-    [handleTopicClick, handleTopicHover, handleManageEntityClick],
+    [canCreate, handleTopicClick, handleTopicHover, handleManageEntityClick],
   );
 
   const renderSections = useCallback(
@@ -85,7 +86,7 @@ const SideBar = () => {
         title={section.name}
         onTitleMouseEnter={handleOpenSection}
         onTitleClick={handleOpenSection}
-        icon={
+        icon={canCreate ?
           <Popover
             key={section.id}
             className={sm.Section}
@@ -112,7 +113,7 @@ const SideBar = () => {
           >
             <SettingFilled />
           </Popover>
-        }
+        : undefined}
       >
         {canCreate && (
           <button
